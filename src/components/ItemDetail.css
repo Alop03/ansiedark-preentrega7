@@ -1,0 +1,127 @@
+.detalle {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.9fr);
+    overflow: hidden;
+    border: 1px solid rgba(101, 28, 50, 0.24);
+    background-color: rgba(255, 255, 255, 0.35);
+}
+
+.detalle__imagen-contenedor {
+    min-height: 32rem;
+    background-color: #b26679;
+}
+
+.detalle__imagen {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.detalle__informacion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(2rem, 5vw, 4.5rem);
+}
+
+.detalle__categoria {
+    margin: 0 0 0.75rem;
+    color: #651c32;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.detalle__nombre {
+    margin: 0;
+    color: #111;
+    font-size: clamp(2rem, 4vw, 3.75rem);
+    line-height: 1;
+}
+
+.detalle__descripcion {
+    margin: 1.5rem 0 0;
+    color: #3d3437;
+    line-height: 1.7;
+}
+
+.detalle__precio {
+    margin: 1.75rem 0 0;
+    color: #651c32;
+    font-size: 1.7rem;
+    font-weight: 800;
+}
+
+.detalle__stock {
+    margin: 0.5rem 0 0;
+    color: #3d3437;
+    font-size: 0.9rem;
+}
+
+.detalle__mensaje {
+    margin: 1rem 0 0;
+    padding: 0.9rem;
+    border-left: 4px solid #651c32;
+    background-color: rgba(101, 28, 50, 0.08);
+    color: #651c32;
+    font-weight: 700;
+}
+
+.detalle__confirmacion {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.detalle__ir-carrito {
+    display: inline-flex;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid #651c32;
+    color: #651c32;
+    font-weight: 800;
+    text-decoration: none;
+    transition:
+        background-color 180ms ease,
+        color 180ms ease;
+}
+
+.detalle__ir-carrito:hover,
+.detalle__ir-carrito:focus-visible {
+    background-color: #651c32;
+    color: #f8fbca;
+}
+
+.detalle__en-carrito {
+    margin: 0.75rem 0 0;
+    color: #651c32;
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+
+.detalle__stock-completo {
+    margin: 1.5rem 0 0;
+    padding: 1rem;
+    border: 1px solid #651c32;
+    color: #651c32;
+    font-weight: 800;
+    text-align: center;
+}
+
+
+@media (max-width: 760px) {
+    .detalle {
+        grid-template-columns: 1fr;
+    }
+
+    .detalle__imagen-contenedor {
+        min-height: 24rem;
+    }
+
+    .detalle__informacion {
+        padding: 2rem 1.25rem;
+    }
+}

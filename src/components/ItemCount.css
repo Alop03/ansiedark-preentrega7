@@ -1,0 +1,66 @@
+.contador {
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
+.contador__etiqueta {
+    margin: 0;
+    color: #111;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.contador__controles {
+    display: grid;
+    grid-template-columns: 2.75rem 1fr 2.75rem;
+    align-items: center;
+    overflow: hidden;
+    border: 1px solid #651c32;
+}
+
+.contador__boton {
+    min-height: 2.75rem;
+    border: 0;
+    background-color: #651c32;
+    color: #f8fbca;
+    font: inherit;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+.contador__boton:hover:not(:disabled) {
+    background-color: #4e0000;
+}
+
+.contador__boton:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+}
+
+.contador__cantidad {
+    color: #111;
+    font-weight: 700;
+    text-align: center;
+}
+
+.contador__agregar {
+    min-height: 3rem;
+    padding: 0.8rem 1.25rem;
+    border: 1px solid #651c32;
+    background-color: #651c32;
+    color: #f8fbca;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.contador__agregar:hover:not(:disabled) {
+    background-color: #4e0000;
+}
+
+.contador__agregar:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}

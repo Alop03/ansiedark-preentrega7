@@ -1,0 +1,48 @@
+.no-encontrado {
+    width: min(42rem, calc(100% - 2rem));
+    min-height: 70vh;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.no-encontrado__codigo {
+    margin: 0 0 0.75rem;
+    color: #651c32;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.no-encontrado__titulo {
+    margin: 0;
+    color: #111;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    line-height: 1;
+}
+
+.no-encontrado__descripcion {
+    max-width: 32rem;
+    margin: 1.5rem 0;
+    color: #3d3437;
+    line-height: 1.7;
+}
+
+.no-encontrado__enlace {
+    display: inline-flex;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    background-color: #651c32;
+    color: #f8fbca;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.no-encontrado__enlace:hover {
+    background-color: #4e0000;
+}

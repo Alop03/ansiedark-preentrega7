@@ -1,0 +1,136 @@
+/* Grilla dinámica del catálogo */
+
+.productos {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: min(100%, 1200px);
+    margin-inline: auto;
+    gap: 28px;
+}
+
+.producto {
+    display: flex;
+    min-width: 0;
+    border: 1px solid rgba(101, 28, 50, 0.25);
+    background-color: rgba(255, 255, 255, 0.52);
+    flex-direction: column;
+    transition:
+        box-shadow 180ms ease,
+        transform 180ms ease;
+}
+
+.producto:hover {
+    box-shadow: 10px 10px 0 #651c32;
+    transform: translate(-4px, -4px);
+}
+
+.producto__imagen-contenedor {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background-color: #e8e9c0;
+}
+
+.producto__imagen {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 300ms ease;
+}
+
+.producto:hover .producto__imagen {
+    transform: scale(1.035);
+}
+
+.producto__categoria {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    padding: 8px 12px;
+    background-color: #651c32;
+    color: #ffffff;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.producto__informacion {
+    display: flex;
+    height: 100%;
+    padding: 24px;
+    flex-direction: column;
+}
+
+.producto__nombre {
+    color: #111111;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.75rem;
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+.producto__descripcion {
+    margin-block: 16px 24px;
+    color: #4e3c43;
+    line-height: 1.6;
+}
+
+.producto__datos {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid rgba(101, 28, 50, 0.18);
+    gap: 16px;
+}
+
+.producto__precio {
+    color: #651c32;
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+.producto__stock {
+    color: #67565c;
+    font-size: 0.78rem;
+}
+
+.producto__enlace {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.5rem;
+    padding: 0.7rem 1rem;
+    border: 1px solid #651c32;
+    background-color: transparent;
+    color: #651c32;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition:
+        background-color 180ms ease,
+        color 180ms ease;
+}
+
+.producto__enlace:hover,
+.producto__enlace:focus-visible {
+    background-color: #651c32;
+    color: #f8fbca;
+}
+
+@media (max-width: 900px) {
+    .productos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 580px) {
+    .productos {
+        grid-template-columns: 1fr;
+    }
+}

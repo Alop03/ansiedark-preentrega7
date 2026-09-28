@@ -1,0 +1,9 @@
+/* Estructura principal de la aplicación */
+
+#root {
+    min-height: 100vh;
+}
+
+.contenido-principal {
+    min-height: calc(100vh - 88px);
+}

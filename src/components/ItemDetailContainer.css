@@ -1,0 +1,38 @@
+.detalle-contenedor {
+    width: min(72rem, calc(100% - 2rem));
+    margin: 1rem auto 5rem;
+}
+
+.detalle-contenedor__encabezado {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.detalle-contenedor__etiqueta {
+    margin: 0 0 0.5rem;
+    color: #651c32;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.detalle-contenedor__titulo {
+    margin: 0;
+    color: #111;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.detalle-contenedor__estado {
+    min-height: 15rem;
+    display: grid;
+    place-items: center;
+    margin: 0;
+    color: #651c32;
+    font-weight: 700;
+    text-align: center;
+}
+
+.detalle-contenedor__estado--error {
+    color: #9e1b32;
+}
