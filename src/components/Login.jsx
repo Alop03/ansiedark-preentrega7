@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useAuth } from "../context/useAuth"
 import PasswordInput from "./PasswordInput"
+import "./Auth.css"
 
 function Login() {
     const { login } = useAuth()
@@ -39,9 +40,9 @@ function Login() {
 
             <form className="auth__form" onSubmit={handleSubmit}>
                 <div className="auth__campo">
-                    <label htmlFor="register-email">Correo electrónico</label>
+                    <label htmlFor="login-email">Correo electrónico</label>
                     <input
-                        id="register-email"
+                        id="login-email"
                         type="email"
                         autoComplete="email"
                         required
@@ -67,7 +68,9 @@ function Login() {
 
             <p>
                 ¿Todavía no tenés cuenta?{" "}
-                <Link to="/register">Creá una cuenta</Link>
+                <Link to="/register" state={location.state}>
+                    Creá una cuenta
+                </Link>
             </p>
         </section>
     )

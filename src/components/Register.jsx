@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useAuth } from "../context/useAuth"
 import PasswordInput from "./PasswordInput"
 import "./Auth.css"
@@ -7,6 +7,7 @@ import "./Auth.css"
 function Register() {
     const { register } = useAuth()
     const navigate = useNavigate()
+    const location = useLocation()
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -32,7 +33,8 @@ function Register() {
 
         try {
             await register(email.trim(), password)
-            navigate("/", { replace: true })
+            const destination = location.state?.from?.pathname ?? "/"
+            navigate(destination, { replace: true })
         } catch (firebaseError) {
             if (firebaseError.code === "auth/email-already-in-use") {
                 setError("No pudimos crear la cuenta con ese correo.")
