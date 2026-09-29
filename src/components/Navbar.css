@@ -133,3 +133,83 @@
         white-space: nowrap;
     }
 }
+
+.navbar__acciones {
+    display: flex;
+    align-items: center;
+    justify-self: end;
+    gap: 12px;
+}
+
+.navbar__email {
+    max-width: 180px;
+    overflow: hidden;
+    color: #f8fbca;
+    font-size: 0.78rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.navbar__cuenta {
+    padding: 8px 10px;
+    border: 1px solid rgba(248, 251, 202, 0.45);
+    border-radius: 4px;
+    background: transparent;
+    color: #f8fbca;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.78rem;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.navbar__cuenta:hover,
+.navbar__cuenta:focus-visible {
+    background: #f8fbca;
+    color: #651c32;
+}
+
+@media (max-width: 720px) {
+    .navbar__acciones {
+        gap: 8px;
+    }
+
+    .navbar__email {
+        max-width: 90px;
+    }
+}
+
+@media (max-width: 720px) {
+    .navbar {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .navbar__marca {
+        grid-column: 1;
+        grid-row: 1;
+        padding-block: 8px 16px;
+    }
+
+    .navbar__acciones {
+        grid-column: 1;
+        grid-row: 2;
+        justify-self: stretch;
+        justify-content: flex-end;
+        width: 100%;
+        padding-bottom: 16px;
+        gap: 8px;
+    }
+
+    .navbar__email {
+        max-width: min(45vw, 180px);
+        margin-right: 0;
+        text-align: right;
+    }
+
+    .navbar__categorias {
+        grid-column: 1;
+        grid-row: 3;
+        padding-top: 16px;
+    }
+}

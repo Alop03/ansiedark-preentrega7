@@ -1,267 +1,114 @@
-# Ansiedark — Pre-entrega 6
+# Ansiedark — Pre-entrega 7
 
-Sexta pre-entrega del curso de React JS de Coderhouse.
+E-commerce de joyas desarrollado para el curso de React JS de Coderhouse. Esta entrega conecta el catálogo con Cloud Firestore e incorpora autenticación y creación de órdenes.
 
-Ansiedark es un e-commerce de joyas desarrollado con React. Su propuesta se basa en una selección mensual de piezas para personas que hacen de su identidad una estética.
+## Funcionalidades
 
-## Objetivo de la entrega
+- Catálogo obtenido desde la colección `products` de Firestore.
+- Filtro por categoría con `query()` y `where()`.
+- Detalle de producto con `doc()` y `getDoc()`.
+- Estados de carga, error y catálogo vacío.
+- Carrito global con Context API, control de stock, subtotales y total.
+- Registro e inicio de sesión con correo y contraseña.
+- Sesión recuperada al recargar la página y cierre de sesión.
+- Ruta `/checkout` protegida para usuarios autenticados.
+- Formulario de datos de entrega y resumen de compra.
+- Comprobación de precio y stock contra Firestore antes de enviar.
+- Orden guardada en `orders` con ID automático y fecha del servidor.
+- Confirmación con el ID de la orden.
+- El carrito se vacía solo cuando la orden se guarda correctamente.
 
-Esta entrega incorpora un carrito de compras funcional mediante Context API.
+## Rutas
 
-La aplicación permite:
+| Ruta | Contenido | Acceso |
+|---|---|---|
+| `/` | Catálogo completo | Público |
+| `/category/:categoryId` | Catálogo por categoría | Público |
+| `/item/:itemId` | Detalle de producto | Público |
+| `/cart` | Carrito | Público |
+| `/register` | Registro | Público |
+| `/login` | Inicio de sesión | Público |
+| `/checkout` | Datos de entrega y confirmación | Requiere sesión |
+| `*` | Página no encontrada | Público |
 
-- Agregar productos desde su vista de detalle.
-- Seleccionar cantidades respetando el stock.
-- Mantener el carrito al navegar entre rutas.
-- Sumar cantidades sin duplicar productos.
-- Mostrar la cantidad total en el CartWidget.
-- Visualizar productos, cantidades y subtotales.
-- Calcular el precio total de la compra.
-- Eliminar productos individualmente.
-- Vaciar completamente el carrito.
-- Mostrar una vista alternativa cuando el carrito está vacío.
+Si una persona intenta acceder a `/checkout` sin sesión, se la envía a `/login` y vuelve al checkout después de ingresar. Un carrito vacío redirige a `/cart`.
 
-## Funcionalidades incorporadas
-
-- Contexto global mediante `createContext`.
-- Componente `CartProvider`.
-- Hook personalizado `useCart`.
-- Estado global `cart`.
-- Actualizaciones inmutables.
-- Prevención de productos duplicados.
-- Acumulación de cantidades mediante `.map()`.
-- Eliminación individual mediante `.filter()`.
-- Cálculo de unidades y totales mediante `.reduce()`.
-- Consulta de productos mediante `.find()` y `.some()`.
-- Control de stock total y stock restante.
-- CartWidget dinámico.
-- Ruta `/cart`.
-- Vista condicional para carrito vacío.
-- Subtotal por producto.
-- Total general.
-- Eliminación individual.
-- Vaciado completo.
-- Placeholder para finalizar la compra.
-- Navegación para continuar comprando.
-
-## Arquitectura del contexto
-
-El estado del carrito se encuentra en:
+## Estructura principal
 
 ```text
-src/context/CartContext.jsx
+src/
+├── components/
+│   ├── Cart.jsx
+│   ├── Checkout.jsx
+│   ├── Login.jsx
+│   ├── PasswordInput.jsx
+│   ├── ProtectedRoute.jsx
+│   └── Register.jsx
+├── context/
+│   ├── AuthContext.jsx
+│   ├── CartContext.jsx
+│   ├── useAuth.js
+│   └── useCart.js
+└── firebase/
+    ├── config.js
+    └── services/
+        ├── orderService.js
+        └── productService.js
 ```
 
-El hook para consumirlo se encuentra en:
+`firestore.rules` contiene una copia de las reglas configuradas en Firebase Console.
 
-```text
-src/context/useCart.js
-```
+## Datos y seguridad
 
-La aplicación está envuelta por `CartProvider` desde `main.jsx`, por lo que el contexto está disponible en todas las rutas y componentes.
+La colección `products` contiene seis documentos. El ID de cada documento es el ID usado en la URL del producto. Sus campos son `name`, `price`, `category`, `img`, `stock` y `description`.
 
-```text
-CartProvider
-└── App
-    └── Layout
-        ├── Navbar
-        │   └── CartWidget
-        ├── Outlet
-        │   ├── Catálogo
-        │   ├── Detalle
-        │   └── Carrito
-        └── Footer
-```
+Las reglas permiten leer productos públicamente y bloquean su escritura desde el cliente. Para crear una orden se requiere una sesión de Firebase Authentication y que el `userId` y el correo de la orden coincidan con el usuario autenticado. Cada usuario puede consultar sus propias órdenes; las modificaciones y eliminaciones desde el cliente están bloqueadas.
 
-## Operaciones del carrito
-
-### `addItem(item, quantity)`
-
-Agrega un producto al carrito.
-
-Si el producto ya existe, actualiza su cantidad mediante `.map()` sin crear un objeto duplicado.
-
-La cantidad acumulada nunca puede superar el stock disponible.
-
-### `removeItem(itemId)`
-
-Elimina un producto mediante su ID utilizando `.filter()`.
-
-### `clear()`
-
-Vacía completamente el carrito.
-
-### `isInCart(itemId)`
-
-Devuelve un valor booleano indicando si el producto ya existe en el carrito.
-
-### `getItemQuantity(itemId)`
-
-Devuelve la cantidad actualmente agregada de un producto.
-
-Permite calcular el stock restante antes de mostrar `ItemCount`.
-
-### `totalItems`
-
-Suma todas las unidades agregadas mediante `.reduce()`.
-
-Este valor se muestra dinámicamente en `CartWidget`.
-
-### `totalPrice`
-
-Calcula la suma de los subtotales de todos los productos mediante `.reduce()`.
-
-## Integración con el detalle
-
-`ItemDetail` consume `useCart` y envía el producto junto con la cantidad seleccionada:
-
-```js
-addItem(item, cantidad)
-```
-
-El stock restante se calcula restando las unidades existentes en el carrito:
-
-```js
-const stockRestante = stock - cantidadEnCarrito
-```
-
-Cuando el usuario alcanza el stock completo, el contador deja de mostrarse y aparece un mensaje informativo.
-
-## Vista del carrito
-
-La ruta:
-
-```text
-/cart
-```
-
-renderiza el componente `Cart`.
-
-Cuando el carrito contiene productos, muestra:
-
-- Imagen.
-- Nombre.
-- Precio unitario.
-- Cantidad.
-- Subtotal.
-- Botón para eliminar.
-- Cantidad total de unidades.
-- Precio total.
-- Botón para vaciar.
-- Placeholder para finalizar la compra.
-
-Cuando el carrito está vacío, muestra un mensaje y un enlace para regresar al catálogo.
-
-## Inmutabilidad
-
-El estado nunca se modifica directamente.
-
-Las operaciones utilizan:
-
-- Spread operator para crear objetos y arrays nuevos.
-- `.map()` para actualizar cantidades.
-- `.filter()` para eliminar productos.
-- `.reduce()` para calcular totales.
-- `.find()` para localizar productos.
-- `.some()` para verificar existencia.
+La comprobación de precios y stock que realiza el checkout mejora la experiencia, pero ocurre en el navegador. Esta entrega no implementa pagos, reserva de stock ni validación comercial desde un servidor.
 
 ## Persistencia
 
-El carrito persiste mientras el usuario navega entre las diferentes rutas de la aplicación.
+Firebase Authentication conserva la sesión al recargar, siempre que el navegador admita su almacenamiento local. El carrito utiliza estado en memoria: permanece al navegar entre rutas, pero se reinicia al recargar la página.
 
-En esta etapa utiliza estado en memoria, por lo que se reinicia si se actualiza completamente el navegador. La persistencia definitiva se incorporará posteriormente mediante Firebase.
+## Configuración local
 
-## Rutas disponibles
-
-| Ruta | Función |
-|---|---|
-| `/` | Catálogo completo |
-| `/category/:categoryId` | Productos filtrados por categoría |
-| `/item/:itemId` | Detalle individual |
-| `/cart` | Carrito de compras |
-| `/admin` | Redirección al inicio |
-| `*` | Página 404 |
-
-## Componentes principales
-
-### `CartProvider`
-
-Administra el estado global y las operaciones del carrito.
-
-### `useCart`
-
-Permite consumir el contexto y valida que exista un Provider.
-
-### `CartWidget`
-
-Muestra la cantidad total de unidades y enlaza con `/cart`.
-
-### `Cart`
-
-Presenta el contenido del carrito, los subtotales y el total general.
-
-### `ItemDetail`
-
-Conecta `ItemCount` con `addItem`.
-
-### `ItemCount`
-
-Administra la cantidad seleccionada respetando el stock restante.
-
-### `Layout`
-
-Mantiene Navbar, CartWidget y Footer en todas las rutas.
-
-## Tecnologías utilizadas
-
-- React 19
-- Context API
-- React Router DOM
-- Vite
-- JavaScript
-- CSS
-- React Icons
-- Git y GitHub
-
-## Instalación
-
-Clonar el repositorio:
+Clonar el repositorio e instalar las dependencias:
 
 ```bash
-git clone https://github.com/Alop03/ansiedark-preentrega6.git
-```
-
-Ingresar al proyecto:
-
-```bash
-cd ansiedark-preentrega6
-```
-
-Instalar las dependencias:
-
-```bash
+git clone https://github.com/Alop03/ansiedark-preentrega7.git
+cd ansiedark-preentrega7
 npm install
 ```
 
-Iniciar el servidor de desarrollo:
+Crear un archivo `.env` en la raíz con los valores de la app web registrada en Firebase. `.env.example` contiene los nombres necesarios:
+
+```env
+VITE_FIREBASE_API_KEY=
+VITE_FIREBASE_AUTH_DOMAIN=
+VITE_FIREBASE_PROJECT_ID=
+VITE_FIREBASE_STORAGE_BUCKET=
+VITE_FIREBASE_MESSAGING_SENDER_ID=
+VITE_FIREBASE_APP_ID=
+```
+
+El archivo `.env` está excluido de Git. Las variables `VITE_` forman parte de la configuración pública del cliente web; la protección de los datos depende de Authentication y las reglas de Firestore.
+
+En Firebase se deben habilitar Cloud Firestore y el proveedor Email/Password de Authentication, cargar los productos en `products` y publicar las reglas incluidas en `firestore.rules`.
+
+Iniciar la aplicación:
 
 ```bash
 npm run dev
 ```
 
-## Validación del proyecto
-
-Ejecutar el analizador de código:
+## Validación
 
 ```bash
 npm run lint
-```
-
-Generar la versión de producción:
-
-```bash
 npm run build
 ```
+
+El build puede mostrar una advertencia de Vite por el tamaño de un chunk de JavaScript; la compilación finaliza correctamente.
 
 ## Autor
 

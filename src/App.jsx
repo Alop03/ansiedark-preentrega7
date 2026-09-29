@@ -8,6 +8,10 @@ import ItemListContainer from "./components/ItemListContainer"
 import ItemDetailContainer from "./components/ItemDetailContainer"
 import Cart from "./components/Cart"
 import NotFound from "./components/NotFound"
+import Register from "./components/Register"
+import Login from "./components/Login"
+import Checkout from "./components/Checkout"
+import ProtectedRoute from "./components/ProtectedRoute"
 import "./App.css"
 
 // Organiza la navegación mediante un layout y rutas anidadas.
@@ -57,6 +61,26 @@ function App() {
                     path="*"
                     element={<NotFound />}
                 />
+
+                <Route
+                    path="register"
+                    element={<Register />}
+                />
+
+                <Route
+                    path="login"
+                    element={<Login />}
+                />
+
+                <Route
+                    path="checkout"
+                    element={
+                        <ProtectedRoute>
+                            <Checkout />
+                        </ProtectedRoute>
+                    }
+                />
+
             </Route>
         </Routes>
     )

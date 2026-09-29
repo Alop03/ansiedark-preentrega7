@@ -139,13 +139,12 @@ function Cart() {
                         </strong>
                     </div>
 
-                    <button
-                        type="button"
+                    <Link
                         className="carrito-total__finalizar"
-                        disabled
+                        to="/checkout"
                     >
-                        Finalizar compra próximamente
-                    </button>
+                        Continuar al checkout
+                    </Link>
 
                     <button
                         type="button"

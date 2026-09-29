@@ -175,15 +175,16 @@
 }
 
 .carrito-total__finalizar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 1px solid #f8fbca;
     background-color: #f8fbca;
     color: #651c32;
+    text-align: center;
+    text-decoration: none;
 }
 
-.carrito-total__finalizar:disabled {
-    cursor: not-allowed;
-    opacity: 0.65;
-}
 
 .carrito-total__vaciar {
     border: 1px solid rgba(248, 251, 202, 0.6);

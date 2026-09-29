@@ -1,9 +1,24 @@
 import { Link, NavLink } from "react-router-dom"
 import CartWidget from "./CartWidget"
+import { useState } from "react"
+import { useAuth } from "../context/useAuth"
 import "./Navbar.css"
 
 // Navegación principal conectada con las rutas del catálogo.
 function Navbar() {
+    const { user, loading, logout } = useAuth()
+    const [logoutError, setLogoutError] = useState("")
+
+    async function handleLogout() {
+        setLogoutError("")
+
+        try {
+            await logout()
+        } catch {
+            setLogoutError("No pudimos cerrar sesión. Intentá nuevamente.")
+        }
+    }
+
     function obtenerClaseEnlace({ isActive }) {
         return isActive
             ? "navbar__enlace navbar__enlace--activo"
@@ -53,7 +68,31 @@ function Navbar() {
                     </li>
                 </ul>
 
-                <CartWidget />
+               <div className="navbar__acciones">
+                    {!loading && (
+                        user ? (
+                            <>
+                                <span className="navbar__email" title={user.email}>
+                                    {user.email}
+                                </span>
+                                <button
+                                    className="navbar__cuenta"
+                                    type="button"
+                                    onClick={handleLogout}
+                                >
+                                    Salir
+                                </button>
+                            </>
+                        ) : (
+                            <Link className="navbar__cuenta" to="/login">
+                                Ingresar
+                            </Link>
+                        )
+                    )}
+
+                    <CartWidget />
+                    {logoutError && <span role="alert">{logoutError}</span>}
+                </div>
             </nav>
         </header>
     )
