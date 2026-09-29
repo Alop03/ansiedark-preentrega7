@@ -1,8 +1,9 @@
+import styles from "../AuthForm/AuthForm.module.css"
 import { useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import { useAuth } from "../context/useAuth"
-import PasswordInput from "./PasswordInput"
-import "./Auth.css"
+import { useAuth } from "../../context/useAuth"
+import PasswordInput from "../PasswordInput/PasswordInput"
+
 
 function Register() {
     const { register } = useAuth()
@@ -49,12 +50,12 @@ function Register() {
     }
 
     return (
-        <section className="auth" aria-labelledby="register-title">
+        <section className={styles["auth"]} aria-labelledby="register-title">
             <h1 id="register-title">Crear cuenta</h1>
             <p>Registrate para poder finalizar tu compra.</p>
 
-            <form className="auth__form" onSubmit={handleSubmit}>
-                <div className="auth__campo">
+            <form className={styles["auth__form"]} onSubmit={handleSubmit}>
+                <div className={styles["auth__campo"]}>
                     <label htmlFor="register-email">Correo electrónico</label>
                     <input
                         id="register-email"
@@ -83,9 +84,9 @@ function Register() {
                     onChange={(event) => setConfirmPassword(event.target.value)}
                 />
 
-                {error && <p className="auth__error" role="alert">{error}</p>}
+                {error && <p className={styles["auth__error"]} role="alert">{error}</p>}
 
-                <button className="auth__submit" type="submit" disabled={submitting}>
+                <button className={styles["auth__submit"]} type="submit" disabled={submitting}>
                     {submitting ? "Creando cuenta..." : "Crear cuenta"}
                 </button>
             </form>

@@ -38,12 +38,19 @@ Si una persona intenta acceder a `/checkout` sin sesión, se la envía a `/login
 ```text
 src/
 ├── components/
-│   ├── Cart.jsx
-│   ├── Checkout.jsx
-│   ├── Login.jsx
-│   ├── PasswordInput.jsx
-│   ├── ProtectedRoute.jsx
-│   └── Register.jsx
+│   ├── Cart/
+│   │   ├── Cart.jsx
+│   │   └── Cart.module.css
+│   ├── Checkout/
+│   │   ├── Checkout.jsx
+│   │   └── Checkout.module.css
+│   ├── Login/
+│   │   └── Login.jsx
+│   ├── Register/
+│   │   └── Register.jsx
+│   ├── AuthForm/
+│   │   └── AuthForm.module.css
+│   └── ...
 ├── context/
 │   ├── AuthContext.jsx
 │   ├── CartContext.jsx
@@ -55,6 +62,8 @@ src/
         ├── orderService.js
         └── productService.js
 ```
+
+Cada componente tiene su propia carpeta. Los estilos de los formularios se comparten mediante `AuthForm.module.css`; los del carrito de navegación, mediante `Navbar.module.css`. `index.css` contiene únicamente estilos globales y la normalización básica.
 
 `firestore.rules` contiene una copia de las reglas configuradas en Firebase Console.
 

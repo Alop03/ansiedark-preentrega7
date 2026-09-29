@@ -1,10 +1,9 @@
+import styles from "./ItemDetailContainer.module.css"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { getProductById } from "../firebase/services/productService"
-import ItemDetail from "./ItemDetail"
-import "./ItemDetailContainer.css"
+import { getProductById } from "../../firebase/services/productService"
+import ItemDetail from "../ItemDetail/ItemDetail"
 
-// Obtiene desde la URL el ID de la joya y solicita su información.
 function ItemDetailContainer() {
     const { itemId } = useParams()
 
@@ -37,17 +36,17 @@ function ItemDetailContainer() {
 
     return (
         <section
-            className="detalle-contenedor"
+            className={styles["detalle-contenedor"]}
             aria-labelledby="titulo-detalle"
         >
-            <header className="detalle-contenedor__encabezado">
-                <p className="detalle-contenedor__etiqueta">
+            <header className={styles["detalle-contenedor__encabezado"]}>
+                <p className={styles["detalle-contenedor__etiqueta"]}>
                     Pieza seleccionada
                 </p>
 
                 <h1
                     id="titulo-detalle"
-                    className="detalle-contenedor__titulo"
+                    className={styles["detalle-contenedor__titulo"]}
                 >
                     Conocé cada detalle
                 </h1>
@@ -55,7 +54,7 @@ function ItemDetailContainer() {
 
             {cargando && (
                 <p
-                    className="detalle-contenedor__estado"
+                    className={styles["detalle-contenedor__estado"]}
                     role="status"
                 >
                     Preparando el detalle de la joya...
@@ -64,7 +63,7 @@ function ItemDetailContainer() {
 
             {error && (
                 <p
-                    className="detalle-contenedor__estado detalle-contenedor__estado--error"
+                    className={`${styles["detalle-contenedor__estado"]} ${styles["detalle-contenedor__estado--error"]}`}
                     role="alert"
                 >
                     {error}

@@ -5,7 +5,6 @@ import {
 
 const CartContext = createContext(null)
 
-// Centraliza el carrito y expone operaciones inmutables para modificarlo.
 function CartProvider({ children }) {
     const [cart, setCart] = useState([])
 

@@ -1,12 +1,10 @@
-import Item from "./Item"
-import "./ItemList.css"
+import styles from "./ItemList.module.css"
+import Item from "../Item/Item"
 
-// Transforma la colección recibida en componentes visuales.
 function ItemList({ items }) {
-    
-        // Cada producto se delega al componente Item para separar responsabilidades.
+
     return (
-        <div className="productos">
+        <div className={styles["productos"]}>
             {items.map((item) => (
                 <Item
                     key={item.id}

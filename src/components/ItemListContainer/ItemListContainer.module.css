@@ -1,5 +1,3 @@
-/* Encabezado y estados del catálogo */
-
 .catalogo {
     min-height: calc(100vh - 88px);
     padding: clamp(56px, 8vw, 96px) 24px;

@@ -1,7 +1,6 @@
+import styles from "./ItemCount.module.css"
 import { useState } from "react"
-import "./ItemCount.css"
 
-// Permite seleccionar una cantidad sin superar el stock disponible.
 function ItemCount({ initial = 1, stock, onAdd }) {
     const [cantidad, setCantidad] = useState(initial)
 
@@ -22,15 +21,15 @@ function ItemCount({ initial = 1, stock, onAdd }) {
     }
 
     return (
-        <div className="contador">
-            <p className="contador__etiqueta">
+        <div className={styles["contador"]}>
+            <p className={styles["contador__etiqueta"]}>
                 Seleccioná la cantidad
             </p>
 
-            <div className="contador__controles">
+            <div className={styles["contador__controles"]}>
                 <button
                     type="button"
-                    className="contador__boton"
+                    className={styles["contador__boton"]}
                     onClick={disminuirCantidad}
                     disabled={cantidad === 1}
                     aria-label="Disminuir cantidad"
@@ -39,7 +38,7 @@ function ItemCount({ initial = 1, stock, onAdd }) {
                 </button>
 
                 <span
-                    className="contador__cantidad"
+                    className={styles["contador__cantidad"]}
                     aria-live="polite"
                 >
                     {cantidad}
@@ -47,7 +46,7 @@ function ItemCount({ initial = 1, stock, onAdd }) {
 
                 <button
                     type="button"
-                    className="contador__boton"
+                    className={styles["contador__boton"]}
                     onClick={aumentarCantidad}
                     disabled={cantidad === stock}
                     aria-label="Aumentar cantidad"
@@ -58,7 +57,7 @@ function ItemCount({ initial = 1, stock, onAdd }) {
 
             <button
                 type="button"
-                className="contador__agregar"
+                className={styles["contador__agregar"]}
                 onClick={confirmarCantidad}
                 disabled={stock === 0}
             >

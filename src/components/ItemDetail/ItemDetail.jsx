@@ -1,10 +1,9 @@
+import styles from "./ItemDetail.module.css"
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { useCart } from "../context/useCart"
-import ItemCount from "./ItemCount"
-import "./ItemDetail.css"
+import { useCart } from "../../context/useCart"
+import ItemCount from "../ItemCount/ItemCount"
 
-// Presenta el producto y controla su incorporación al carrito global.
 function ItemDetail({ item }) {
     const [mensaje, setMensaje] = useState("")
 
@@ -52,38 +51,38 @@ function ItemDetail({ item }) {
     }
 
     return (
-        <article className="detalle">
-            <div className="detalle__imagen-contenedor">
+        <article className={styles["detalle"]}>
+            <div className={styles["detalle__imagen-contenedor"]}>
                 <img
-                    className="detalle__imagen"
+                    className={styles["detalle__imagen"]}
                     src={img}
                     alt={name}
                 />
             </div>
 
-            <div className="detalle__informacion">
-                <p className="detalle__categoria">
+            <div className={styles["detalle__informacion"]}>
+                <p className={styles["detalle__categoria"]}>
                     {category}
                 </p>
 
-                <h3 className="detalle__nombre">
+                <h3 className={styles["detalle__nombre"]}>
                     {name}
                 </h3>
 
-                <p className="detalle__descripcion">
+                <p className={styles["detalle__descripcion"]}>
                     {description}
                 </p>
 
-                <p className="detalle__precio">
+                <p className={styles["detalle__precio"]}>
                     {precioFormateado}
                 </p>
 
-                <p className="detalle__stock">
+                <p className={styles["detalle__stock"]}>
                     Stock disponible: {stock}
                 </p>
 
                 {cantidadEnCarrito > 0 && (
-                    <p className="detalle__en-carrito">
+                    <p className={styles["detalle__en-carrito"]}>
                         En tu carrito: {cantidadEnCarrito}
                     </p>
                 )}
@@ -99,7 +98,7 @@ function ItemDetail({ item }) {
 
                 {productoAgotadoEnCarrito && (
                     <p
-                        className="detalle__stock-completo"
+                        className={styles["detalle__stock-completo"]}
                         role="status"
                     >
                         Ya agregaste todo el stock disponible.
@@ -107,16 +106,16 @@ function ItemDetail({ item }) {
                 )}
 
                 {mensaje && (
-                    <div className="detalle__confirmacion">
+                    <div className={styles["detalle__confirmacion"]}>
                         <p
-                            className="detalle__mensaje"
+                            className={styles["detalle__mensaje"]}
                             role="status"
                         >
                             {mensaje}
                         </p>
 
                         <Link
-                            className="detalle__ir-carrito"
+                            className={styles["detalle__ir-carrito"]}
                             to="/cart"
                         >
                             Ver carrito

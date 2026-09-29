@@ -1,8 +1,7 @@
+import styles from "./Cart.module.css"
 import { Link } from "react-router-dom"
-import { useCart } from "../context/useCart"
-import "./Cart.css"
+import { useCart } from "../../context/useCart"
 
-// Presenta el contenido del carrito y sus operaciones principales.
 function Cart() {
     const {
         cart,
@@ -22,23 +21,23 @@ function Cart() {
 
     if (cart.length === 0) {
         return (
-            <section className="carrito-vista carrito-vista--vacio">
-                <p className="carrito-vista__etiqueta">
+            <section className={`${styles["carrito-vista"]} ${styles["carrito-vista--vacio"]}`}>
+                <p className={styles["carrito-vista__etiqueta"]}>
                     Tu selección
                 </p>
 
-                <h1 className="carrito-vista__titulo">
+                <h1 className={styles["carrito-vista__titulo"]}>
                     Tu carrito está vacío
                 </h1>
 
-                <p className="carrito-vista__descripcion">
+                <p className={styles["carrito-vista__descripcion"]}>
                     Todavía no elegiste ninguna joya.
                     Explorá el catálogo y encontrá una pieza
                     para sumar a tu selección.
                 </p>
 
                 <Link
-                    className="carrito-vista__volver"
+                    className={styles["carrito-vista__volver"]}
                     to="/"
                 >
                     Explorar el catálogo
@@ -48,25 +47,25 @@ function Cart() {
     }
 
     return (
-        <section className="carrito-vista">
-            <header className="carrito-vista__encabezado">
+        <section className={styles["carrito-vista"]}>
+            <header className={styles["carrito-vista__encabezado"]}>
                 <div>
-                    <p className="carrito-vista__etiqueta">
+                    <p className={styles["carrito-vista__etiqueta"]}>
                         Tu selección
                     </p>
 
-                    <h1 className="carrito-vista__titulo">
+                    <h1 className={styles["carrito-vista__titulo"]}>
                         Carrito de compras
                     </h1>
                 </div>
 
-                <p className="carrito-vista__resumen">
+                <p className={styles["carrito-vista__resumen"]}>
                     {totalItems} unidades seleccionadas
                 </p>
             </header>
 
-            <div className="carrito-vista__contenido">
-                <div className="carrito-lista">
+            <div className={styles["carrito-vista__contenido"]}>
+                <div className={styles["carrito-lista"]}>
                     {cart.map((producto) => {
                         const {
                             id,
@@ -80,30 +79,30 @@ function Cart() {
 
                         return (
                             <article
-                                className="carrito-item"
+                                className={styles["carrito-item"]}
                                 key={id}
                             >
                                 <img
-                                    className="carrito-item__imagen"
+                                    className={styles["carrito-item__imagen"]}
                                     src={img}
                                     alt={name}
                                 />
 
-                                <div className="carrito-item__informacion">
-                                    <h2 className="carrito-item__nombre">
+                                <div className={styles["carrito-item__informacion"]}>
+                                    <h2 className={styles["carrito-item__nombre"]}>
                                         {name}
                                     </h2>
 
-                                    <p className="carrito-item__dato">
+                                    <p className={styles["carrito-item__dato"]}>
                                         Precio unitario:{" "}
                                         {formatearPrecio(price)}
                                     </p>
 
-                                    <p className="carrito-item__dato">
+                                    <p className={styles["carrito-item__dato"]}>
                                         Cantidad: {quantity}
                                     </p>
 
-                                    <p className="carrito-item__subtotal">
+                                    <p className={styles["carrito-item__subtotal"]}>
                                         Subtotal:{" "}
                                         {formatearPrecio(subtotal)}
                                     </p>
@@ -111,7 +110,7 @@ function Cart() {
 
                                 <button
                                     type="button"
-                                    className="carrito-item__eliminar"
+                                    className={styles["carrito-item__eliminar"]}
                                     onClick={() => removeItem(id)}
                                     aria-label={`Eliminar ${name} del carrito`}
                                 >
@@ -122,17 +121,17 @@ function Cart() {
                     })}
                 </div>
 
-                <aside className="carrito-total">
-                    <p className="carrito-total__etiqueta">
+                <aside className={styles["carrito-total"]}>
+                    <p className={styles["carrito-total__etiqueta"]}>
                         Resumen de compra
                     </p>
 
-                    <div className="carrito-total__fila">
+                    <div className={styles["carrito-total__fila"]}>
                         <span>Unidades</span>
                         <strong>{totalItems}</strong>
                     </div>
 
-                    <div className="carrito-total__fila carrito-total__fila--principal">
+                    <div className={`${styles["carrito-total__fila"]} ${styles["carrito-total__fila--principal"]}`}>
                         <span>Total</span>
                         <strong>
                             {formatearPrecio(totalPrice)}
@@ -140,7 +139,7 @@ function Cart() {
                     </div>
 
                     <Link
-                        className="carrito-total__finalizar"
+                        className={styles["carrito-total__finalizar"]}
                         to="/checkout"
                     >
                         Continuar al checkout
@@ -148,14 +147,14 @@ function Cart() {
 
                     <button
                         type="button"
-                        className="carrito-total__vaciar"
+                        className={styles["carrito-total__vaciar"]}
                         onClick={clear}
                     >
                         Vaciar carrito
                     </button>
 
                     <Link
-                        className="carrito-total__continuar"
+                        className={styles["carrito-total__continuar"]}
                         to="/"
                     >
                         Continuar comprando

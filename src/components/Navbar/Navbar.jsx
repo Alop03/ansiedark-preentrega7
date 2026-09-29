@@ -1,10 +1,9 @@
+import styles from "./Navbar.module.css"
 import { Link, NavLink } from "react-router-dom"
-import CartWidget from "./CartWidget"
+import CartWidget from "../CartWidget/CartWidget"
 import { useState } from "react"
-import { useAuth } from "../context/useAuth"
-import "./Navbar.css"
+import { useAuth } from "../../context/useAuth"
 
-// Navegación principal conectada con las rutas del catálogo.
 function Navbar() {
     const { user, loading, logout } = useAuth()
     const [logoutError, setLogoutError] = useState("")
@@ -20,26 +19,24 @@ function Navbar() {
     }
 
     function obtenerClaseEnlace({ isActive }) {
-        return isActive
-            ? "navbar__enlace navbar__enlace--activo"
-            : "navbar__enlace"
+        return isActive ? styles["navbar__enlace--activo"] : undefined
     }
 
     return (
-        <header className="encabezado">
+        <header className={styles["encabezado"]}>
             <nav
-                className="navbar"
+                className={styles["navbar"]}
                 aria-label="Navegación principal"
             >
                 <Link
-                    className="navbar__marca"
+                    className={styles["navbar__marca"]}
                     to="/"
                     aria-label="Ansiedark, ir al inicio"
                 >
                     Ansiedark
                 </Link>
 
-                <ul className="navbar__categorias">
+                <ul className={styles["navbar__categorias"]}>
                     <li>
                         <NavLink
                             className={obtenerClaseEnlace}
@@ -68,15 +65,15 @@ function Navbar() {
                     </li>
                 </ul>
 
-               <div className="navbar__acciones">
+               <div className={styles["navbar__acciones"]}>
                     {!loading && (
                         user ? (
                             <>
-                                <span className="navbar__email" title={user.email}>
+                                <span className={styles["navbar__email"]} title={user.email}>
                                     {user.email}
                                 </span>
                                 <button
-                                    className="navbar__cuenta"
+                                    className={styles["navbar__cuenta"]}
                                     type="button"
                                     onClick={handleLogout}
                                 >
@@ -84,7 +81,7 @@ function Navbar() {
                                 </button>
                             </>
                         ) : (
-                            <Link className="navbar__cuenta" to="/login">
+                            <Link className={styles["navbar__cuenta"]} to="/login">
                                 Ingresar
                             </Link>
                         )

@@ -1,8 +1,8 @@
+import styles from "../Navbar/Navbar.module.css"
 import { FiShoppingBag } from "react-icons/fi"
 import { Link } from "react-router-dom"
-import { useCart } from "../context/useCart"
+import { useCart } from "../../context/useCart"
 
-// Muestra la cantidad total de unidades guardadas en el carrito global.
 function CartWidget() {
     const { totalItems } = useCart()
 
@@ -12,18 +12,18 @@ function CartWidget() {
 
     return (
         <Link
-            className="carrito"
+            className={styles["carrito"]}
             to="/cart"
             aria-label={textoAccesible}
         >
             <FiShoppingBag
-                className="carrito__icono"
+                className={styles["carrito__icono"]}
                 aria-hidden="true"
             />
 
             {totalItems > 0 && (
                 <span
-                    className="carrito__cantidad"
+                    className={styles["carrito__cantidad"]}
                     aria-live="polite"
                 >
                     {totalItems}

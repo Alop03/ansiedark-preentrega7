@@ -1,10 +1,11 @@
+import styles from "./Checkout.module.css"
 import { useRef, useState } from "react"
 import { Link, Navigate } from "react-router-dom"
-import { useAuth } from "../context/useAuth"
-import { useCart } from "../context/useCart"
-import { getProductById } from "../firebase/services/productService"
-import { createOrder } from "../firebase/services/orderService"
-import "./Checkout.css"
+import { useAuth } from "../../context/useAuth"
+import { useCart } from "../../context/useCart"
+import { getProductById } from "../../firebase/services/productService"
+import { createOrder } from "../../firebase/services/orderService"
+
 
 const formatPrice = (value) =>
     new Intl.NumberFormat("es-UY", {
@@ -31,11 +32,11 @@ function Checkout() {
 
     if (orderId) {
         return (
-            <section className="checkout checkout__confirmation" role="status">
-                <p className="checkout__eyebrow">Pedido confirmado</p>
+            <section className={`${styles["checkout"]} ${styles["checkout__confirmation"]}`} role="status">
+                <p className={styles["checkout__eyebrow"]}>Pedido confirmado</p>
                 <h1>Gracias por tu compra</h1>
                 <p>Tu número de orden es:</p>
-                <strong className="checkout__order-id">{orderId}</strong>
+                <strong className={styles["checkout__order-id"]}>{orderId}</strong>
                 <p>Guardá este número para identificar tu pedido.</p>
                 <Link to="/">Volver al catálogo</Link>
             </section>
@@ -136,19 +137,19 @@ function Checkout() {
     }
 
     return (
-        <section className="checkout" aria-labelledby="checkout-title">
-            <div className="checkout__heading">
-                <p className="checkout__eyebrow">Tu pedido</p>
+        <section className={styles["checkout"]} aria-labelledby="checkout-title">
+            <div className={styles["checkout__heading"]}>
+                <p className={styles["checkout__eyebrow"]}>Tu pedido</p>
                 <h1 id="checkout-title">Finalizar compra</h1>
                 <p>
                     Revisá tu selección y completá los datos de entrega.
                 </p>
             </div>
 
-            <div className="checkout__grid">
-                <div className="checkout__form">
+            <div className={styles["checkout__grid"]}>
+                <div className={styles["checkout__form"]}>
                     <h2>Datos de entrega</h2>
-                    <p className="checkout__account">
+                    <p className={styles["checkout__account"]}>
                         Compra asociada a <strong>{user.email}</strong>
                     </p>
 
@@ -208,13 +209,13 @@ function Checkout() {
                         />
 
                         {error && (
-                            <p className="checkout__error" role="alert">
+                            <p className={styles["checkout__error"]} role="alert">
                                 {error}
                             </p>
                         )}
 
                         <button
-                            className="checkout__submit"
+                            className={styles["checkout__submit"]}
                             type="submit"
                             disabled={submitting}
                         >
@@ -224,7 +225,7 @@ function Checkout() {
                     </form>
                 </div>
 
-                <aside className="checkout__summary">
+                <aside className={styles["checkout__summary"]}>
                     <h2>Resumen</h2>
 
                     <ul>
@@ -242,7 +243,7 @@ function Checkout() {
                         ))}
                     </ul>
 
-                    <p className="checkout__total">
+                    <p className={styles["checkout__total"]}>
                         <span>Total · {totalItems} unidades</span>
                         <strong>{formatPrice(totalPrice)}</strong>
                     </p>

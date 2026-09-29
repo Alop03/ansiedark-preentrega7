@@ -1,6 +1,6 @@
+import styles from "../ItemList/ItemList.module.css"
 import { Link } from "react-router-dom"
 
-// Presenta la información resumida y enlaza al detalle del producto.
 function Item({ item }) {
     const {
         id,
@@ -17,30 +17,30 @@ function Item({ item }) {
     }).format(price)
 
     return (
-        <article className="producto">
-            <div className="producto__imagen-contenedor">
+        <article className={styles["producto"]}>
+            <div className={styles["producto__imagen-contenedor"]}>
                 <img
-                    className="producto__imagen"
+                    className={styles["producto__imagen"]}
                     src={img}
                     alt={name}
                 />
 
-                <span className="producto__categoria">
+                <span className={styles["producto__categoria"]}>
                     {category}
                 </span>
             </div>
 
-            <div className="producto__informacion">
-                <h2 className="producto__nombre">
+            <div className={styles["producto__informacion"]}>
+                <h2 className={styles["producto__nombre"]}>
                     {name}
                 </h2>
 
-                <p className="producto__precio">
+                <p className={styles["producto__precio"]}>
                     {precioFormateado}
                 </p>
 
                 <Link
-                    className="producto__enlace"
+                    className={styles["producto__enlace"]}
                     to={`/item/${id}`}
                 >
                     Ver detalle

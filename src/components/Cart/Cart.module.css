@@ -93,6 +93,10 @@
     object-fit: cover;
 }
 
+.carrito-item__informacion {
+    min-width: 0;
+}
+
 .carrito-item__nombre {
     margin: 0 0 0.75rem;
     color: #111;

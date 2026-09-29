@@ -1,3 +1,4 @@
+import styles from "../AuthForm/AuthForm.module.css"
 import { useState } from "react"
 
 function PasswordInput({
@@ -11,10 +12,10 @@ function PasswordInput({
     const [visible, setVisible] = useState(false)
 
     return (
-        <div className="auth__campo">
+        <div className={styles["auth__campo"]}>
             <label htmlFor={id}>{label}</label>
 
-            <div className="auth__password">
+            <div className={styles["auth__password"]}>
                 <input
                     id={id}
                     type={visible ? "text" : "password"}
@@ -27,7 +28,7 @@ function PasswordInput({
 
                 <button
                     type="button"
-                    className="auth__mostrar"
+                    className={styles["auth__mostrar"]}
                     onClick={() => setVisible((current) => !current)}
                     aria-label={
                         visible

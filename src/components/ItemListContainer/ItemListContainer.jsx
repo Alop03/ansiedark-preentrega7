@@ -1,10 +1,9 @@
+import styles from "./ItemListContainer.module.css"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { getProducts } from "../firebase/services/productService"
-import ItemList from "./ItemList"
-import "./ItemListContainer.css"
+import { getProducts } from "../../firebase/services/productService"
+import ItemList from "../ItemList/ItemList"
 
-// Obtiene los productos, administra sus estados y delega su presentación.
 function ItemListContainer({ greeting }) {
     const { categoryId } = useParams()
     
@@ -12,7 +11,6 @@ function ItemListContainer({ greeting }) {
     const [cargando, setCargando] = useState(true)
     const [error, setError] = useState("")
 
-    // La petición se repite cuando cambia la categoría de la URL.
     useEffect(() => {
         async function cargarProductos() {
             setCargando(true)
@@ -38,22 +36,22 @@ function ItemListContainer({ greeting }) {
     return (
         <section
             id="catalogo"
-            className="catalogo"
+            className={styles["catalogo"]}
             aria-labelledby="titulo-catalogo"
         >
-            <header className="catalogo__encabezado">
-                <p className="catalogo__etiqueta">
+            <header className={styles["catalogo__encabezado"]}>
+                <p className={styles["catalogo__etiqueta"]}>
                     Suscripción mensual de joyas
                 </p>
 
                 <h1
                     id="titulo-catalogo"
-                    className="catalogo__titulo"
+                    className={styles["catalogo__titulo"]}
                 >
                     {greeting}
                 </h1>
 
-                <p className="catalogo__descripcion">
+                <p className={styles["catalogo__descripcion"]}>
                     Una selección diferente para combinar,
                     mezclar y hacer propia.
                 </p>
@@ -61,7 +59,7 @@ function ItemListContainer({ greeting }) {
 
             {cargando && (
                 <p
-                    className="catalogo__estado"
+                    className={styles["catalogo__estado"]}
                     role="status"
                 >
                     Preparando la selección...
@@ -70,7 +68,7 @@ function ItemListContainer({ greeting }) {
 
             {error && (
                 <p
-                    className="catalogo__estado catalogo__estado--error"
+                    className={`${styles["catalogo__estado"]} ${styles["catalogo__estado--error"]}`}
                     role="alert"
                 >
                     {error}
@@ -78,7 +76,7 @@ function ItemListContainer({ greeting }) {
             )}
 
             {!cargando && !error && items.length === 0 && (
-                <p className="catalogo__estado">
+                <p className={styles["catalogo__estado"]}>
                     No encontramos joyas en esta categoría.
                 </p>
             )}

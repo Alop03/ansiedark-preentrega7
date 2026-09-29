@@ -1,8 +1,9 @@
+import styles from "../AuthForm/AuthForm.module.css"
 import { useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import { useAuth } from "../context/useAuth"
-import PasswordInput from "./PasswordInput"
-import "./Auth.css"
+import { useAuth } from "../../context/useAuth"
+import PasswordInput from "../PasswordInput/PasswordInput"
+
 
 function Login() {
     const { login } = useAuth()
@@ -34,12 +35,12 @@ function Login() {
     }
 
     return (
-        <section className="auth" aria-labelledby="login-title">
+        <section className={styles["auth"]} aria-labelledby="login-title">
             <h1 id="login-title">Iniciar sesión</h1>
             <p>Ingresá a tu cuenta para continuar con tu compra.</p>
 
-            <form className="auth__form" onSubmit={handleSubmit}>
-                <div className="auth__campo">
+            <form className={styles["auth__form"]} onSubmit={handleSubmit}>
+                <div className={styles["auth__campo"]}>
                     <label htmlFor="login-email">Correo electrónico</label>
                     <input
                         id="login-email"
@@ -59,9 +60,9 @@ function Login() {
                     onChange={(event) => setPassword(event.target.value)}
                 />
 
-                {error && <p className="auth__error" role="alert">{error}</p>}
+                {error && <p className={styles["auth__error"]} role="alert">{error}</p>}
 
-                <button className="auth__submit" type="submit" disabled={submitting}>
+                <button className={styles["auth__submit"]} type="submit" disabled={submitting}>
                     {submitting ? "Ingresando..." : "Iniciar sesión"}
                 </button>
             </form>

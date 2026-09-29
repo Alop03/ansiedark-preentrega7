@@ -3,18 +3,16 @@ import {
     Route,
     Routes,
 } from "react-router-dom"
-import Layout from "./components/Layout"
-import ItemListContainer from "./components/ItemListContainer"
-import ItemDetailContainer from "./components/ItemDetailContainer"
-import Cart from "./components/Cart"
-import NotFound from "./components/NotFound"
-import Register from "./components/Register"
-import Login from "./components/Login"
-import Checkout from "./components/Checkout"
-import ProtectedRoute from "./components/ProtectedRoute"
-import "./App.css"
+import Layout from "./components/Layout/Layout"
+import ItemListContainer from "./components/ItemListContainer/ItemListContainer"
+import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailContainer"
+import Cart from "./components/Cart/Cart"
+import NotFound from "./components/NotFound/NotFound"
+import Register from "./components/Register/Register"
+import Login from "./components/Login/Login"
+import Checkout from "./components/Checkout/Checkout"
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute"
 
-// Organiza la navegación mediante un layout y rutas anidadas.
 function App() {
     return (
         <Routes>
