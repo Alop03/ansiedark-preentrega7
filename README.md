@@ -1,6 +1,6 @@
-# Ansiedark — Pre-entrega 7
+# Ansiedark — Proyecto Final
 
-E-commerce de joyas desarrollado para el curso de React JS de Coderhouse. Esta entrega conecta el catálogo con Cloud Firestore e incorpora autenticación y creación de órdenes.
+E-commerce de joyas desarrollado con React para el Proyecto Final del curso de Coderhouse. El catálogo se consulta desde Cloud Firestore; Firebase Authentication gestiona las cuentas y Firestore guarda las órdenes.
 
 ## Funcionalidades
 
@@ -109,6 +109,15 @@ Iniciar la aplicación:
 ```bash
 npm run dev
 ```
+
+## Despliegue en Vercel
+
+1. Importar este repositorio desde GitHub y seleccionar Vite como framework. El comando de build es `npm run build` y el directorio de salida es `dist`.
+2. Configurar en Vercel las seis variables `VITE_FIREBASE_*` con los mismos valores de la aplicación web de Firebase. Aplicarlas al entorno Production antes de desplegar.
+3. Desplegar y agregar el dominio público resultante en Firebase Authentication → Settings → Authorized domains. Ingresar solo el dominio, sin `https://` ni rutas.
+4. Probar la URL pública, el catálogo, el registro y el inicio de sesión, el carrito y una orden. Actualizar el navegador desde `/item/anillo-niebla`, `/cart` y `/checkout`.
+
+`vercel.json` dirige las rutas internas a `index.html` para que React Router pueda resolverlas después de una recarga. Si cambia alguna variable de entorno en Vercel, se necesita un nuevo despliegue para incorporar ese valor al build.
 
 ## Validación
 
